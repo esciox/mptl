@@ -20,7 +20,7 @@ toastr.options = {
 };
 
 class Task{
-    
+
     constructor(object, target, placeHolder){
 
         //this.formTask = new FormTask();
@@ -31,7 +31,7 @@ class Task{
 
         ipcRenderer.removeAllListeners('task.doIt:reply').on('task.doIt:reply', (event, result) => {
             this.afterDoIt(result);
-        });        
+        });
 
     }
 
@@ -43,10 +43,11 @@ class Task{
         let editBtn = '';
         let deleteBtn = '';
         let customClass = '';
+        let title = '';
 
         style = `color:${record.cnt_color}; background-color:${record.cnt_background_color}`;
 
-        
+
         // if task is already done, show only delete btn
         if(record.tsk_status != 'DONE'){
             doneBtn = '<i class="check circle icon" title="Task Done"></i>';
@@ -57,16 +58,23 @@ class Task{
 
         deleteBtn = '<i class="minus circle icon" title="Delete Task"></i>';
 
+        title += `
+Title: ${record.tsk_title}
+
+Content: ${record.tsk_content}
+
+Priority: ${record.tsk_priority}`;
+
         if(record.tsk_id){
-            task = `<div data-type="task" data-tsk_id="${record.tsk_id}" id="task_${record.tsk_id}" 
-                    class="task ${customClass}" style="${style}" title="${record.tsk_title}">
+            task = `<div data-type="task" data-tsk_id="${record.tsk_id}" id="task_${record.tsk_id}"
+                    class="task ${customClass}" style="${style}" title="${title}">
                     ${this.cutString(record.tsk_title, 15)}
                     <div class="actionButtons">
                         ${doneBtn}
                         ${editBtn}
                         ${deleteBtn}
                     </div>
-                    </div>`;    
+                    </div>`;
         }
 
         return task;
@@ -101,7 +109,7 @@ class Task{
 
         // delete
         $('.minus.circle.icon', task).off('click').on('click', {tsk_id}, this.deleteIt );
-        
+
     }
 
     addEventsToAll(scope = document){
@@ -115,7 +123,7 @@ class Task{
     }
 
     editIt(event){
-        
+
         let tsk_id = event.data.tsk_id;
 
         // raise event
@@ -124,9 +132,9 @@ class Task{
     }
 
     deleteIt(event){
-        
+
         if(!confirm('Are you sure to delete it?')){
-            return; 
+            return;
         }
 
         let tsk_id = event.data.tsk_id;
@@ -146,23 +154,23 @@ class Task{
     afterDelete(result){
 
         if(result.status){
-            
+
             let task = $(`div[data-tsk_id="${result.data.tsk_id}"]`);
-            
+
             task.remove();
 
         } else {
             toastr.error(result.error);
         }
 
-        
+
     }
 
     afterDoIt(result){
-        
+
         if(result.status){
             let task = $(`div[data-tsk_id="${result.data.tsk_id}"]`);
-            
+
             task.addClass('taskDone');
 
             //remove buttons
@@ -183,9 +191,9 @@ class Task{
             return string;
         }
 
-        
 
-    }   
+
+    }
 
 }
 

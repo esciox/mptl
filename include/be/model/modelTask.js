@@ -18,7 +18,7 @@ class ModelTask {
             this.insert(callback, event, arg);
         }
 
-        
+
     }
 
 
@@ -27,10 +27,10 @@ class ModelTask {
         let tsk_container_id = arg.cnt_id;
         let res;
 
-        db.run("UPDATE tasks SET tsk_container_id = $tsk_container_id, tsk_date = null " + 
+        db.run("UPDATE tasks SET tsk_container_id = $tsk_container_id, tsk_date = null " +
                 " WHERE tsk_id = $tsk_id", {
             $tsk_id:tsk_id,
-            $tsk_container_id:tsk_container_id, 
+            $tsk_container_id:tsk_container_id,
         }, (err, row) =>  {
 
             if(err){
@@ -39,19 +39,19 @@ class ModelTask {
                 callback(event, {
                     status: 0,
                     error: err.code,
-                    data: null    
+                    data: null
                 });
             } else {
-                
+
                 db.get("SELECT * FROM containers WHERE cnt_id = ? ", tsk_container_id, (err, row) => {
-            
+
                     if(err){
                         console.log(err);
 
                         callback(event, {
                             status: 0,
                             error: err.code,
-                            data: null    
+                            data: null
                         });
 
                     } else {
@@ -60,16 +60,16 @@ class ModelTask {
                             error: null,
                             data: {
                                 tsk_id: tsk_id,
-                                cnt_id: row.cnt_id, 
+                                cnt_id: row.cnt_id,
                                 cnt_name: row.cnt_name,
                                 cnt_color: row.cnt_color,
                                 cnt_background_color: row.cnt_background_color,
-                            } 
+                            }
                         });
                     }
 
                 });
-                
+
             }
 
         });
@@ -83,7 +83,7 @@ class ModelTask {
         db.run("UPDATE tasks SET tsk_date = $tsk_date " +
             " WHERE tsk_id = $tsk_id", {
             $tsk_id:tsk_id,
-            $tsk_date:tsk_date, 
+            $tsk_date:tsk_date,
         }, (err, row) =>  {
 
             if(err){
@@ -93,13 +93,13 @@ class ModelTask {
                 callback(event, {
                     status: 0,
                     error: err.code,
-                    data: null    
+                    data: null
                 });
             } else {
                 callback(event, {
                     status: 1,
                     error: null,
-                    data: row    
+                    data: row
                 });
             }
 
@@ -108,7 +108,7 @@ class ModelTask {
 
 
     insert(callback, event, arg){
-        
+
         let tsk_title = arg.tsk_title;
         let tsk_content = arg.tsk_content;
         let tsk_container_id = arg.tsk_container_id;
@@ -120,27 +120,27 @@ class ModelTask {
         db.run(
             "INSERT INTO tasks (tsk_title, tsk_content, tsk_container_id, tsk_priority, tsk_date, tsk_time) " +
             "VALUES ($tsk_title, $tsk_content, $tsk_container_id, $tsk_priority, $tsk_date, $tsk_time)", {
-            $tsk_title:tsk_title, 
-            $tsk_content:tsk_content, 
-            $tsk_container_id:tsk_container_id, 
-            $tsk_priority:tsk_priority, 
-            $tsk_date:tsk_date, 
+            $tsk_title:tsk_title,
+            $tsk_content:tsk_content,
+            $tsk_container_id:tsk_container_id,
+            $tsk_priority:tsk_priority,
+            $tsk_date:tsk_date,
             $tsk_time:tsk_time
         }, (err) =>  {
-            
+
             if(err){
                 console.log(err);
 
                 callback(event, {
                     status: 0,
                     error: err.code,
-                    data: null    
+                    data: null
                 });
             } else {
                 callback(event, {
                     status: 1,
                     error: null,
-                    data: null    
+                    data: null
                 });
             }
 
@@ -148,7 +148,7 @@ class ModelTask {
     }
 
     update(callback, event, arg){
-        
+
         let tsk_id = arg.tsk_id;
         let tsk_title = arg.tsk_title;
         let tsk_content = arg.tsk_content;
@@ -157,15 +157,15 @@ class ModelTask {
         let tsk_date = arg.tsk_date;
         let tsk_time = arg.tsk_time;
 
-        db.run("UPDATE tasks SET tsk_title = $tsk_title, tsk_content = $tsk_content, " + 
+        db.run("UPDATE tasks SET tsk_title = $tsk_title, tsk_content = $tsk_content, " +
             "tsk_container_id = $tsk_container_id, tsk_priority = $tsk_priority, tsk_date = $tsk_date, " +
             "tsk_time = $tsk_time WHERE tsk_id = $tsk_id", {
             $tsk_id:tsk_id,
-            $tsk_title:tsk_title, 
-            $tsk_content:tsk_content, 
-            $tsk_container_id:tsk_container_id, 
-            $tsk_priority:tsk_priority, 
-            $tsk_date:tsk_date, 
+            $tsk_title:tsk_title,
+            $tsk_content:tsk_content,
+            $tsk_container_id:tsk_container_id,
+            $tsk_priority:tsk_priority,
+            $tsk_date:tsk_date,
             $tsk_time:tsk_time
         }, (err, rows) =>  {
 
@@ -175,13 +175,13 @@ class ModelTask {
                 callback(event, {
                     status: 0,
                     error: err.code,
-                    data: null    
+                    data: null
                 });
             } else {
                 callback(event, {
                     status: 1,
                     error: null,
-                    data: rows    
+                    data: rows
                 });
             }
 
@@ -194,20 +194,20 @@ class ModelTask {
         let tsk_id = arg.tsk_id || 0;
 
         db.run("DELETE from tasks WHERE tsk_id = ?", [ tsk_id ], (err, rows) =>  {
-            
+
             if(err){
                 console.log(err);
 
                 callback(event, {
                     status: 0,
                     error: err.code,
-                    data: null    
+                    data: null
                 });
             } else {
                 callback(event, {
                     status: 1,
                     error: null,
-                    data: {tsk_id}    
+                    data: {tsk_id}
                 });
             }
 
@@ -219,20 +219,20 @@ class ModelTask {
         let tsk_id = arg.tsk_id || 0;
 
         db.run("UPDATE tasks SET tsk_status = 'DONE' WHERE tsk_id = ?", [ tsk_id ], (err, rows) =>  {
-            
+
             if(err){
                 console.log(err);
 
                 callback(event, {
                     status: 0,
                     error: err.code,
-                    data: null    
+                    data: null
                 });
             } else {
                 callback(event, {
                     status: 1,
                     error: null,
-                    data: {tsk_id}    
+                    data: {tsk_id}
                 });
             }
 
@@ -242,48 +242,48 @@ class ModelTask {
 
     getAll(callback, event){
         db.all("SELECT * FROM tasks", (err, rows) =>  {
-            
+
             if(err){
                 console.log(err);
 
                 callback(event, {
                     status: 0,
                     error: err.code,
-                    data: null    
+                    data: null
                 });
             } else {
                 callback(event, {
                     status: 1,
                     error: null,
-                    data: rows    
+                    data: rows
                 });
             }
-            
+
         });
     }
 
     getData(callback, event, arg){
-        
+
         let tsk_id = arg.tsk_id || 0;
 
         db.get("SELECT * FROM tasks WHERE tsk_id = ?", [tsk_id], (err, row) =>  {
-            
+
             if(err){
                 console.log(err);
 
                 callback(event, {
                     status: 0,
                     error: err.code,
-                    data: null    
+                    data: null
                 });
             } else {
                 callback(event, {
                     status: 1,
                     error: null,
-                    data: row    
+                    data: row
                 });
             }
-            
+
         });
     }
 
@@ -293,28 +293,28 @@ class ModelTask {
         let dateFrom = arg.dateFrom;
         let dateTo = arg.dateTo;
 
-        db.all( "SELECT * FROM tasks INNER JOIN containers ON tsk_container_id = cnt_id " + 
-                " WHERE tsk_date >= ? AND tsk_date <= ?", [dateFrom, dateTo], (err, rows) =>  {
-            
+        db.all( "SELECT * FROM tasks INNER JOIN containers ON tsk_container_id = cnt_id " +
+                " WHERE tsk_date >= ? AND tsk_date <= ? order by tsk_date, tsk_priority", [dateFrom, dateTo], (err, rows) =>  {
+
             if(err){
                 console.log(err);
 
                 callback(event, {
                     status: 0,
                     error: err.code,
-                    data: null    
+                    data: null
                 });
             } else {
                 callback(event, {
                     status: 1,
                     error: null,
-                    data: rows    
+                    data: rows
                 });
             }
-            
-        });   
+
+        });
     }
 
 }
 
-module.exports = ModelTask; 
+module.exports = ModelTask;
