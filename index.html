@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>My Personal Todo List</title>
+        <link rel="stylesheet" type="text/css" href="lib/semantic/dist/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="include/fe/css/main.css">
+        <link rel="stylesheet" type="text/css" href="./node_modules/toastr/build/toastr.min.css" />
+        <link rel='stylesheet' type="text/css" href='./node_modules/spectrum-colorpicker/spectrum.css' />
+
+        <!-- Insert this line above script imports  -->
+        <!--<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>-->
+
+        <!-- normal script imports etc  -->
+        <script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');</script>
+        <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>-->
+        <script src="./node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+        <script src="lib/semantic/dist/semantic.min.js"></script>
+        <script src="./node_modules/spectrum-colorpicker/spectrum.js"></script>
+        <!--<script src="./node_modules/toastr/build/toastr.min.js"></script>-->
+
+    </head>
+    <body>
+        <div class="ui fixed inverted menu">
+            <div class="inline menuContainer draggable">
+                <i class="clipboard outline orange icon"></i>
+                <span class="textOrange">MPTL ver. 0.0.1</span>
+            </div>
+            <div class="inline menuContainer">
+                <button class="ui icon circular orange button" id="modalContainerBtn" title="Add container">
+                    <i class="folder open outline icon"></i>
+                </button>
+                &nbsp;
+                <button class="ui icon circular orange button" id="modalTaskBtn" title="Add task">
+                    <i class="edit icon"></i>
+                </button>
+            </div>
+            <div id="closeBtn" class="inline menuContainer closeBtn"><i class="close icon orange inverted link"></i></div>
+        </div>
+
+        <div class="ui main container">
+            <div id="accordionWidget" class="ui left visible sidebar menu inverted accordion vertical customSidebar">
+            </div>
+            <div class="pusher customContent">
+               <div id="calendarWidget"></div>
+            </div>
+        </div>
+
+
+        <div id="modalContainer" class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+                Add/Edit Container
+            </div>
+            <div class="modalContent content">
+                <form class="ui form">
+                    <input type="hidden" id="cnt_id" name="cnt_id">
+                    <div class="field">
+                        <label>Name</label>
+                        <input type="text" id="cnt_name" name="cnt_name" placeholder="Name">
+                    </div>
+                    <div class="field">
+                        <label>Color</label>
+                        <input type="color" id="cnt_color" name="cnt_color" placeholder="#000000">
+                    </div>
+                    <div class="field">
+                        <label>Background Color</label>
+                        <input type="color" id="cnt_background_color" name="cnt_background_color" placeholder="#C0C0C0">
+                    </div>
+
+                </form>
+            </div>
+            <div class="actions">
+                <div id="modalContainerCancelBtn" class="ui negative button">
+                    <i class="icon close"></i>
+                    Cancel
+                </div>
+                <div id="modalContainerOKBtn" class="ui positive button">
+                    <i class="icon check"></i>
+                    OK
+                </div>
+            </div>
+        </div>
+
+
+        <div id="modalTask" class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+                Add/Edit Task
+            </div>
+            <div class="modalContent content">
+                <form class="ui form">
+                    <input type="hidden" id="tsk_id" name="tsk_id">
+                    <div class="field">
+                        <label>Title</label>
+                        <input type="text" id="tsk_title" name="tsk_title" placeholder="Title">
+                    </div>
+                    <div class="field">
+                        <label>Content</label>
+                        <textarea rows="3" id="tsk_content"></textarea>
+                    </div>
+                    <div class="field">
+                        <label>Container</label>
+                        <div class="ui selection dropdown" id="tsk_container_id">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">DEFAULT</div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Priority</label>
+                        <div class="ui selection dropdown" id="tsk_priority">
+                            <div class="default text">5</div>
+                            <i class="dropdown icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Datetime</label>
+                        <div class="inline fields">
+                            <div class="field">
+                                <input type="date" placeholder="dd/mm/yyyy" id="tsk_date" >
+                            </div>
+                            <div class="field">
+                                <input type="time" placeholder="h:i" id="tsk_time">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="actions">
+                <div id="modalTaskCancelBtn" class="ui negative button">
+                    <i class="icon close"></i>
+                    Cancel
+                </div>
+                <div id="modalTaskOKBtn" class="ui positive button check">
+                    <i class="icon check"></i>
+                    OK
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            // You can also require other files to run in this process
+            require('./include/fe/js/renderer.js');
+        </script>
+    </body>
+</html>

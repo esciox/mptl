@@ -1,0 +1,35 @@
+{
+  "name": "mptl",
+  "version": "0.0.1",
+  "description": "My personal Todo List",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w sqlite3"
+  },
+  "repository": "https://github.com/esciox/mptl",
+  "keywords": [
+    "personal",
+    "todo",
+    "list"
+  ],
+  "author": "Alessandro Esciana",
+  "license": "WTFPL",
+  "devDependencies": {
+    "electron": "^4.1.5",
+    "electron-builder": "^20.39.0",
+    "electron-rebuild": "^1.8.4"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "jquery": "^3.4.0",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-dist": "^1.12.1",
+    "moment": "^2.24.0",
+    "node-pre-gyp": "^0.13.0",
+    "semantic-ui": "^2.4.2",
+    "spectrum-colorpicker": "^1.8.0",
+    "sqlite3": "^4.0.6",
+    "toastr": "^2.1.4"
+  }
+}

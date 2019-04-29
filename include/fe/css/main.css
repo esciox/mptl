@@ -1,0 +1,152 @@
+body, .ui.modal>.content {
+    background-color: orange !important;
+    overflow: hidden;
+}
+
+.ui.modal>.header, .ui.modal>.actions {
+    color: white;
+    background-color: #1b1c1d !important;
+}
+
+.ui.modal>.close {
+    color: white;
+}
+
+.closeBtn {
+    position: absolute;
+    right: -10px;
+}
+
+.customSidebar {
+    top:48px !important;
+    
+}
+
+.main{
+    margin: 0 !important;
+    padding: 0 !important;
+    width:97% !important; 
+}
+
+.customContent{
+    margin-top: 50px;
+    margin-right: 260px;
+    padding:5px;
+}
+
+.ui.dimmer{
+    background-color: rgba(255,255,255,.85);
+}
+
+.inline{
+    display: inline-block;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.floatRight{
+    float: right;
+}
+
+.selectedWeek{
+    width: 90%;
+    text-align: center;
+}
+
+.menu {
+    padding:5px;
+    border-bottom: 2px solid #F05C02 !important;
+}
+
+.draggable {
+    -webkit-app-region: drag;
+}
+
+.task {
+    /*border: 1px solid silver;*/
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 3px;
+}
+
+#calendarWidget .task {
+    min-height: 50px;
+}
+
+#accordionWidget .task {
+    min-height: 25px;
+}
+
+#calendarWidget th {
+    text-align: center;
+}
+
+.fullGrid {
+    height: 75vh;
+}
+
+#calendarWidget .draggable-list {
+    vertical-align: top;
+    width: 14.28% !important;
+}
+
+.containerPlaceholder {
+    background-color: silver;
+    width: 100%;
+    border-radius: 3px;
+    padding:3px;
+    margin-bottom: 3px;
+}
+
+#calendarWidget .containerPlaceholder {
+    height: 50px;
+}
+
+#accordionWidget .containerPlaceholder {
+    height: 25px;
+}
+
+.point{
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.actionButtons {
+    display: inline-block;
+    float: right;
+}
+
+.actionButtons .icon:hover {
+    cursor: pointer;
+}
+
+.taskDone {
+    text-decoration: line-through;
+}
+
+#calendarConsole {
+    padding: 5px;
+}
+
+.textOrange {
+    color: orange;
+}
+
+.menuContainer{
+    margin-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+div[data-type="task"] i.icon, .containerName  i.icon{
+    opacity: 0.5 !important;
+    transition: opacity 0.5s ease 0s;
+}
+
+div[data-type="task"] i.icon:hover, .containerName  i.icon:hover{
+    opacity: 1 !important;
+}

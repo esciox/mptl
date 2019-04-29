@@ -1,0 +1,47 @@
+SQLITE3 install guide:
+https://www.laurivan.com/make-electron-work-with-sqlite3/
+
+SEMANTIC UI installation guide
+https://semantic-ui.com/introduction/getting-started.html
+MUST BE INSTALLED IN lib/semantic/
+
+
+TODO
+- gestione migliore conversione date (utility?)
+- menu con impostazioni personali (
+    lingua, 
+    formato data, 
+    palette colori, 
+    template colori, 
+    visibilità messaggi save success
+    possibilità di ordinare i bottoni dei task e dei container
+)
+- ottimizzazione codice lato controller
+- pulizia codice e commenti
+- aggiungere effetti vari (cambio colore o grafica nei bottoni dei task sull'hover, effetti di transizione nello spostamento dei task, nella cancellazione, cambio grafica per i task DONE)
+- di default tutti i container chiusi (a quel punto però indicare il numero di task attivi inclusi nel container)
+- tasto invio salva la form se il focus è su un campo diverso dalla textarea
+- se presente l'ora, mostrarla per prima
+- inserimento valori con apici
+- limite alla lunghezza testo container
+- controlli sulle form di ingresso (valori massimi, ecc..)
+- mostrare anche priorità nel ticket
+- il default non deve esser cancellabile
+- logo serio, anche su barra applicazioni
+- portare su git e creare installer
+- cosa succede se il numero di task e di containers superano l'altezza disponibile?
+- drag della finestra
+- creare file di configurazione, con modalità prod e dev
+- non funziona il salvataggio della data
+
+
+
+DONE
+- editing e cancellazione containers
+- verificare funzionamento form task
+- miglioramenti grafici, soprattutto parte griglia
+- rivedere parte superiore (bottoni, logo, versione, ecc...)
+- non si chiude
+- se inserisco un nuovo container, all'apertura della modale, devo riaggiornare l'elenco dei containers nella formTask
+- migliorare grafica drag & drop
+
