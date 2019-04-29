@@ -5,7 +5,7 @@ const addContainer  = $('#addContainer').modal();
 const addTask       = $('#addTask').modal();
 
 class Accordion{
-    
+
     constructor(ref){
         this.$ref = $(`#${ref}`);
         this.data = [];
@@ -32,7 +32,7 @@ class Accordion{
 
     buildHTML(){
 
-        let active, html = '', template, tasks, record, taskRecord, style;
+        let active, html = '', template, tasks, record, taskRecord, style, editIt = '', deleteIt = '';
 
         for(let recordIndex in this.data){
 
@@ -40,14 +40,20 @@ class Accordion{
 
             active = record.container.cnt_name === 'DEFAULT' ? 'active' : '';
 
+            editIt = `<i class="cog icon" title="Edit Container" style="color:${record.container.cnt_background_color}"></i>`;
+
+            if(record.container.cnt_id > 1){
+                deleteIt = `<i class="minus circle icon" title="Delete Container" style="color:${record.container.cnt_background_color}"></i>`;
+            }
+
             tasks = this.task.createTasks(record.tasks);
 
             template = `
                 <div class="item">
                     <a class="${active} title containerName">
                         <i class="dropdown icon"></i>
-                        <i class="cog icon" title="Edit Container" style="color:${record.container.cnt_background_color}"></i>
-                        <i class="minus circle icon" title="Delete Container" style="color:${record.container.cnt_background_color}"></i>
+                        ${editIt}
+                        ${deleteIt}
                         <!--<div class="point" style="background-color:${record.container.cnt_background_color}"></div>-->
                         &nbsp;
                         ${record.container.cnt_name}
@@ -67,7 +73,7 @@ class Accordion{
 
 
     render(){
-        
+
         this.$ref.html(this.buildHTML());
 
         this.afterRender();
@@ -91,7 +97,7 @@ class Accordion{
         // set sortable
         if(this.sortable === null){
             this.sortable = new Sortable(".container .draggable-list", ".container .draggable-list", "containerPlaceholder");
-            this.sortable.init();    
+            this.sortable.init();
         } else {
             this.sortable.update();
         }
@@ -107,7 +113,7 @@ class Accordion{
     afterDelete(result){
 
         if(result.status){
-            
+
             this.update();
             $(document).trigger('reloadCalendar');
 
@@ -115,7 +121,7 @@ class Accordion{
             toastr.error(result.error);
         }
 
-        
+
     }
 
     addEventsToSingle(cnt_id){
@@ -127,7 +133,7 @@ class Accordion{
 
         // delete
         $('.minus.circle.icon', container).off('click').on('click', {cnt_id}, this.deleteIt );
-        
+
     }
 
     addEventsToAll(scope = document){
@@ -138,10 +144,10 @@ class Accordion{
             this.addEventsToSingle($(container).attr('data-cnt_id'));
         }
 
-    }    
+    }
 
     editIt(event){
-        
+
         event.stopPropagation();
 
         let cnt_id = event.data.cnt_id;
@@ -152,11 +158,11 @@ class Accordion{
     }
 
     deleteIt(event){
-        
+
         event.stopPropagation();
 
         if(!confirm('Are you sure to delete this container?')){
-            return; 
+            return;
         }
 
         let cnt_id = event.data.cnt_id;
@@ -190,9 +196,9 @@ class Accordion{
                         cnt_name: record.cnt_name,
                         cnt_color: record.cnt_color,
                         cnt_background_color: record.cnt_background_color
-                    }, 
+                    },
                     tasks: []
-                });    
+                });
             }
 
 
@@ -203,7 +209,7 @@ class Accordion{
                 cnt_name: record.cnt_name,
                 cnt_color: record.cnt_color,
                 cnt_background_color: record.cnt_background_color,
-                tsk_id: record.tsk_id, 
+                tsk_id: record.tsk_id,
                 tsk_title: record.tsk_title,
                 tsk_status: record.tsk_status
             });
@@ -215,7 +221,7 @@ class Accordion{
         this.render();
 
     }
-    
+
 
 }
 
