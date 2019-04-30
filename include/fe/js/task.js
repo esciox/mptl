@@ -28,7 +28,7 @@ class Task{
             2: 'orange',
             3: 'yellow',
             4: 'greenyellow',
-            5: 'green'  
+            5: 'green'
         };
 
         ipcRenderer.removeAllListeners('task.deleteIt:reply').on('task.deleteIt:reply', (event, result) => {
@@ -53,27 +53,28 @@ class Task{
 
         if(record.tsk_id){
 
-            style = `border-top: 3px solid ${this.priorityMap[record.tsk_priority]}; color:${record.cnt_color}; background-color:${record.cnt_background_color}`;
+            // border-top: 3px solid ${this.priorityMap[record.tsk_priority]};
+            style = `color:${record.cnt_color}; background-color:${record.cnt_background_color}`;
 
             // if task is already done, show only delete btn
             if(record.tsk_status != 'DONE'){
-                doneBtn = '<i class="check circle icon" title="Task Done"></i>';
-                editBtn = '<i class="cog icon" title="Edit Task"></i>';
+                doneBtn = '<i class="check circle icon taskBtn" title="Task Done"></i>';
+                editBtn = '<i class="cog icon taskBtn" title="Edit Task"></i>';
             } else {
                 customClass += ' taskDone';
             }
 
-            deleteBtn = '<i class="minus circle icon" title="Delete Task"></i>';
+            deleteBtn = '<i class="minus circle icon taskBtn" title="Delete Task"></i>';
 
             title += `
-Title: ${record.tsk_title}
+${record.tsk_title}
 
-Content: ${record.tsk_content}
-
-Priority: ${record.tsk_priority}`;
+${record.tsk_content}`;
 
             task = `<div data-type="task" data-tsk_id="${record.tsk_id}" id="task_${record.tsk_id}"
                     class="task ${customClass}" style="${style}" title="${title}">
+                    <!--<i class="circle icon" style="color:${this.priorityMap[record.tsk_priority]}" title="Priority: ${record.tsk_priority}"></i>-->
+                    <div class="point" style="background-color:${this.priorityMap[record.tsk_priority]}" title="Priority: ${record.tsk_priority}"></div>
                     ${this.cutString(record.tsk_title, 15)}
                     <div class="actionButtons">
                         ${doneBtn}

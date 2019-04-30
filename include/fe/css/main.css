@@ -109,10 +109,13 @@ body, .ui.modal>.content {
 }
 
 .point{
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
     display: inline-block;
+    margin-right: 5px;
+    border: 1px solid silver;
+    /*box-shadow: 1px 1px 2px black;*/
 }
 
 .actionButtons {
@@ -142,11 +145,11 @@ body, .ui.modal>.content {
     padding-right: 5px;
 }
 
-div[data-type="task"] i.icon, .containerName  i.icon{
+div[data-type="task"] i.taskBtn, .containerName  i.taskBtn{
     opacity: 0.5 !important;
     transition: opacity 0.5s ease 0s;
 }
 
-div[data-type="task"] i.icon:hover, .containerName  i.icon:hover{
+div[data-type="task"] i.taskBtn:hover, .containerName  i.taskBtn:hover{
     opacity: 1 !important;
 }
