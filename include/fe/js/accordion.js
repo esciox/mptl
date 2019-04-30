@@ -211,7 +211,8 @@ class Accordion{
                 cnt_background_color: record.cnt_background_color,
                 tsk_id: record.tsk_id,
                 tsk_title: record.tsk_title,
-                tsk_status: record.tsk_status
+                tsk_status: record.tsk_status, 
+                tsk_priority: record.tsk_priority
             });
 
         }
