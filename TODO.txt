@@ -1,11 +1,3 @@
-SQLITE3 install guide:
-https://www.laurivan.com/make-electron-work-with-sqlite3/
-
-SEMANTIC UI installation guide
-https://semantic-ui.com/introduction/getting-started.html
-MUST BE INSTALLED IN lib/semantic/
-
-
 TODO
 - gestione migliore conversione date (utility?)
 - menu con impostazioni personali (
@@ -27,7 +19,7 @@ TODO
 - controlli sulle form di ingresso (valori massimi, ecc..)
 - logo serio, anche su barra applicazioni
 - cosa succede se il numero di task e di containers superano l'altezza disponibile?
-- creare file di configurazione, con modalità prod e dev
+- sicurezza electron
 
 
 
@@ -44,4 +36,5 @@ DONE
 - drag della finestra
 - mostrare anche priorità nel ticket
 - non funziona il salvataggio della data
+- creare file di configurazione, con modalità prod e dev
 
