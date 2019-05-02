@@ -1,8 +1,11 @@
 const {ipcRenderer} = require('electron');
 const Sortable      = require('./sortable.js');
 const Task          = require('./task.js');
+const config        = require('../../../config.json');
 const addContainer  = $('#addContainer').modal();
 const addTask       = $('#addTask').modal();
+const toastr        = require('../../../node_modules/toastr/build/toastr.min.js');
+
 
 class Accordion{
 
@@ -78,15 +81,6 @@ class Accordion{
 
         this.afterRender();
 
-        /*
-        $(".arrow.left", this.$ref).on("click", () => {
-            this.previousWeek();
-        });
-
-        $(".arrow.right", this.$ref).on("click", () => {
-            this.nextWeek();
-        });
-        */
     }
 
     afterRender(){
@@ -116,6 +110,10 @@ class Accordion{
 
             this.update();
             $(document).trigger('reloadCalendar');
+
+            if(config.showSuccess){
+                toastr.success("Container deleted successfully");
+            }
 
         } else {
             toastr.error(result.error);

@@ -1,4 +1,5 @@
 const {ipcRenderer} = require('electron');
+const config        = require('../../../config.json');
 const toastr        = require('../../../node_modules/toastr/build/toastr.min.js');
 const moment        = require('../../../node_modules/moment/min/moment-with-locales.min.js');
 
@@ -180,7 +181,10 @@ class Sortable{
 
         // ok
         if(result.status){
-            // toastr.success("Saved successfully");
+            
+            if(config.showSuccess){
+                toastr.success("Task saved successfully");
+            }
 
         // error
         } else {

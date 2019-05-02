@@ -3,13 +3,14 @@ const moment        = require('../../../node_modules/moment/min/moment-with-loca
 const Sortable      = require('./sortable.js');
 const Task          = require('./task.js');
 const addTask       = $('#addTask').modal();
+const config        = require('../../../config.json');
 
 class Calendar{
 
     constructor(ref){
         this.$ref = $(`#${ref}`);
         // set current date to the first day of week
-        this.currentDate = moment().locale('it').day(1);
+        this.currentDate = moment().locale(config.locale).day(1);
         this.selectedDate = this.currentDate;
         this.selectedWeek = this.selectedDate.week();
         this.sortable = null;
@@ -75,24 +76,24 @@ class Calendar{
                 <table class="ui striped stacked inverted celled table">
                     <thead>
                         <tr>
-                            <th>${week[0].format("DD/MM/YYYY <br> ddd")}</th>
-                            <th>${week[1].format("DD/MM/YYYY <br> ddd")}</th>
-                            <th>${week[2].format("DD/MM/YYYY <br> ddd")}</th>
-                            <th>${week[3].format("DD/MM/YYYY <br> ddd")}</th>
-                            <th>${week[4].format("DD/MM/YYYY <br> ddd")}</th>
-                            <th>${week[5].format("DD/MM/YYYY <br> ddd")}</th>
-                            <th>${week[6].format("DD/MM/YYYY <br> ddd")}</th>
+                            <th>${week[0].format(config.dateFormat + " <br> ddd")}</th>
+                            <th>${week[1].format(config.dateFormat + " <br> ddd")}</th>
+                            <th>${week[2].format(config.dateFormat + " <br> ddd")}</th>
+                            <th>${week[3].format(config.dateFormat + " <br> ddd")}</th>
+                            <th>${week[4].format(config.dateFormat + " <br> ddd")}</th>
+                            <th>${week[5].format(config.dateFormat + " <br> ddd")}</th>
+                            <th>${week[6].format(config.dateFormat + " <br> ddd")}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td data-type="calendar" data-tsk_date="${week[0].format("DD/MM/YYYY")}" class="fullGrid draggable-list"></td>
-                            <td data-type="calendar" data-tsk_date="${week[1].format("DD/MM/YYYY")}" class="draggable-list"></td>
-                            <td data-type="calendar" data-tsk_date="${week[2].format("DD/MM/YYYY")}" class="draggable-list"></td>
-                            <td data-type="calendar" data-tsk_date="${week[3].format("DD/MM/YYYY")}" class="draggable-list"></td>
-                            <td data-type="calendar" data-tsk_date="${week[4].format("DD/MM/YYYY")}" class="draggable-list"></td>
-                            <td data-type="calendar" data-tsk_date="${week[5].format("DD/MM/YYYY")}" class="draggable-list"></td>
-                            <td data-type="calendar" data-tsk_date="${week[6].format("DD/MM/YYYY")}" class="draggable-list"></td>
+                            <td data-type="calendar" data-tsk_date="${week[0].format(config.dateFormat)}" class="fullGrid draggable-list"></td>
+                            <td data-type="calendar" data-tsk_date="${week[1].format(config.dateFormat)}" class="draggable-list"></td>
+                            <td data-type="calendar" data-tsk_date="${week[2].format(config.dateFormat)}" class="draggable-list"></td>
+                            <td data-type="calendar" data-tsk_date="${week[3].format(config.dateFormat)}" class="draggable-list"></td>
+                            <td data-type="calendar" data-tsk_date="${week[4].format(config.dateFormat)}" class="draggable-list"></td>
+                            <td data-type="calendar" data-tsk_date="${week[5].format(config.dateFormat)}" class="draggable-list"></td>
+                            <td data-type="calendar" data-tsk_date="${week[6].format(config.dateFormat)}" class="draggable-list"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -144,9 +145,9 @@ class Calendar{
     }
 
     update(){
-        // I need to create another moment object, because
-        // moment date functions change obj value
-        // and I'm not able to clone the whole obj in js
+        // I need to clone moment object, because
+        // moment date functions change obj value.
+        // I'm using clone function from moment library
         let date = this.selectedDate.date();
         let month = this.selectedDate.month();
         let year = this.selectedDate.year();
@@ -173,14 +174,6 @@ class Calendar{
 
         // add events to tasks
         this.task.addEventsToAll(this.$ref);
-
-
-        /*
-        let tasks = $('div[data-type="task"]');
-        tasks.off('dblclick').on('dblclick', (event) => {
-            addTask.modal('show');
-        });
-        */
 
     }
 
@@ -222,11 +215,11 @@ class Calendar{
 
     db2outputDate(dateString = ''){
 
-        // from YYYY-MM-DD to DD/MM/YYYY format
+        // from YYYY-MM-DD to config.dateFormat format
 
         if(dateString != ''){
             let date = moment(dateString)
-            return date.format('DD/MM/YYYY');
+            return date.format(config.dateFormat);
         }
 
         return dateString;

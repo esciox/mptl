@@ -1,4 +1,5 @@
 const {ipcRenderer} = require('electron');
+const config        = require('../../../config.json');
 const toastr        = require('../../../node_modules/toastr/build/toastr.min.js');
 
 toastr.options = {
@@ -166,6 +167,10 @@ ${record.tsk_content}`;
 
             task.remove();
 
+            if(config.showSuccess){
+                toastr.success("Task deleted successfully");
+            }
+
         } else {
             toastr.error(result.error);
         }
@@ -183,6 +188,11 @@ ${record.tsk_content}`;
             //remove buttons
             $('.check.circle.icon', task).remove();
             $('.cog.icon', task).remove();
+
+            if(config.showSuccess){
+                toastr.success("Task done");
+            }
+
 
         } else {
             toastr.error(result.error);

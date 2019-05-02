@@ -1,4 +1,5 @@
 const {ipcRenderer} = require('electron');
+const config        = require('../../../config.json');
 const toastr        = require('../../../node_modules/toastr/build/toastr.min.js');
 const moment        = require('../../../node_modules/moment/min/moment-with-locales.min.js');
 
@@ -134,7 +135,7 @@ class FormTask {
 
     output2dbDate(dateString = ''){
 
-        // from DD/MM/YYYY to YYYY-MM-DD HH:MM:SS.SSS format
+        // from YYYY-MM-DD to YYYY-MM-DD HH:MM:SS.SSS format
         let tmp, date='';
 
         if(dateString != ''){
@@ -157,12 +158,13 @@ class FormTask {
         if(result.status){
             this.modalHide();
 
-            // toastr.success("Saved successfully");
-
             // reload main page
             $(document).trigger('reloadAccordion');
             $(document).trigger('reloadCalendar');
 
+            if(config.showSuccess){
+                toastr.success("Task saved successfully");
+            }
 
         // error
         } else {
