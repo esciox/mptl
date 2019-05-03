@@ -1,6 +1,7 @@
 const {ipcRenderer} = require('electron');
 const config        = require('../../../config.json');
 const toastr        = require('../../../node_modules/toastr/build/toastr.min.js');
+const util          = require('./utility.js');
 
 toastr.options = {
     "closeButton": true,
@@ -67,17 +68,23 @@ class Task{
 
             deleteBtn = '<i class="minus circle icon taskBtn" title="Delete Task"></i>';
 
-            title += `${record.tsk_title}`;
-            if(record.tsk_content !== undefined && record.tsk_content != ''){
-                title += `\n\n${record.tsk_content}`;
+            // tasks info
+            if(record.tsk_time !== undefined && record.tsk_time != ''){
+                title += `${record.tsk_time} - `;
             }
+
+            title += util.escapeHtml(`${record.tsk_title}`);
+            
+            if(record.tsk_content !== undefined && record.tsk_content != ''){
+                title += util.escapeHtml(`\n\n${record.tsk_content}`);
+            }
+
             
 
             task = `<div data-type="task" data-tsk_id="${record.tsk_id}" id="task_${record.tsk_id}"
-                    class="task ${customClass}" style="${style}" title="${title}">
-                    <!--<i class="circle icon" style="color:${this.priorityMap[record.tsk_priority]}" title="Priority: ${record.tsk_priority}"></i>-->
+                    class="task ${customClass}" style="${style}">
                     <div class="point" style="background-color:${this.priorityMap[record.tsk_priority]}" title="Priority: ${record.tsk_priority}"></div>
-                    ${this.cutString(record.tsk_title, 13)}
+                    <span title="${title}">${this.cutString(record.tsk_title, 13)}</span>
                     <div class="actionButtons">
                         ${doneBtn}
                         ${editBtn}
