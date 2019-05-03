@@ -13,13 +13,12 @@ TODO
 - aggiungere effetti vari (cambio colore o grafica nei bottoni dei task sull'hover, effetti di transizione nello spostamento dei task, nella cancellazione, cambio grafica per i task DONE)
 - di default tutti i container chiusi (a quel punto però indicare il numero di task attivi inclusi nel container)
 - tasto invio salva la form se il focus è su un campo diverso dalla textarea
-- se presente l'ora, mostrarla per prima
-- inserimento valori con apici
-- limite alla lunghezza testo container
+- limite alla lunghezza testo container e task
 - controlli sulle form di ingresso (valori massimi, ecc..)
 - logo serio, anche su barra applicazioni
 - cosa succede se il numero di task e di containers superano l'altezza disponibile?
 - sicurezza electron
+- togliere i confirm e gli alert nativi, e sostituirli con grafica semantic 
 
 
 
@@ -37,4 +36,5 @@ DONE
 - mostrare anche priorità nel ticket
 - non funziona il salvataggio della data
 - creare file di configurazione, con modalità prod e dev
-
+- se presente l'ora, mostrarla per prima
+- inserimento valori con apici
